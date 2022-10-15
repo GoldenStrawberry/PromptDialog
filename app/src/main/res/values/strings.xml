@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">PromptDialog</string>
+    <string name="test_data" tools:ignore="ExtraTranslation">一、创建一个classCustomDialog继承Dialog并且实现View.OnClickListener接口。   二、重写CustomDialog和onCreate方法，这样，一个自定义Dialog框架就写好了，接下来需要实现他的功能。          （!!!）我们可以看到第一步写的布局中有很多TextView文本，那么在一个高度自定义的Dialog中是需要能够重新编写这些文字的，所以，我们需要能够设置这些文本的set方法，下面我们来实现set方法。          1、声明控件mTitle, mMessage, mConfirm, mCancel。声明字符串sTitle,sMessage, sConfirm, sCancel。          2、在onCreate方法中找到四个控件。          3、右键点击声明的字符串，generate->setter,按住ctrl键点击sTitle,sMessage, sConfirm, sCancel，创建这四个字符串的set方法，这样就得到了四个set方法，如果调用的时候想要使用链式调用，可以象我这样把四个方法的void改成CustomDialog并且返回this。          4、set方法虽然设置了我们想要的字符串，但是还没有将这些字符串传给我们的布局中，所以我们需要在onCreate方法里设置一下(见代码)，如果我们设置的字符串不是空的话，就将其赋值给布局中的text。</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
