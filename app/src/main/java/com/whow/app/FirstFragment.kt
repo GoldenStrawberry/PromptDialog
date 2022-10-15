@@ -39,7 +39,7 @@ class FirstFragment : Fragment() {
                 })
                 setNegativeButton(negativeText = "取消", textSize = 20f, listener = object : PromptDialogInterface.OnClickListener{
                     override fun onClick(dialog: PromptDialogInterface, which: Int) {
-                        Toast.makeText(requireContext(), "点击了cancel", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "点击了取消", Toast.LENGTH_SHORT).show()
                     }
                 })
                 setCancelable(false)
