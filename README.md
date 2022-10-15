@@ -3,7 +3,7 @@ PromptDialog是使用Kotlin编写一个对话框库。在开发项目中常常�
 为了避免重复'造轮子'，所以仿照AlertDialog编写了一个Material风格的对话框
 
 # 使用
-`
+```
 PromptDialog.Builder(requireContext()).apply {
     setTitle("提示",  textSize = 22f)
     setMessage("是否跳转到下个页面？", textSize = 18f)
@@ -19,6 +19,7 @@ PromptDialog.Builder(requireContext()).apply {
     })
     setCancelable(false)
 }.show("1")
-`
+
+```
 
 # 开发完善中...
