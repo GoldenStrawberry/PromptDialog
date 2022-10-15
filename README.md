@@ -1,8 +1,8 @@
-##PromptDialog
+# PromptDialog
 PromptDialog是使用Kotlin编写一个对话框库。在开发项目中常常需要编写自定义Material风格的对话框，
 为了避免重复'造轮子'，所以仿照AlertDialog编写了一个Material风格的对话框
 
-##使用
+# 使用
 `
 PromptDialog.Builder(requireContext()).apply {
     setTitle("提示",  textSize = 22f)
@@ -21,4 +21,4 @@ PromptDialog.Builder(requireContext()).apply {
 }.show("1")
 `
 
-#开发完善中...
+# 开发完善中...
