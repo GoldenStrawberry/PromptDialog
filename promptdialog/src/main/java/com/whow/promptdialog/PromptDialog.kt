@@ -3,30 +3,32 @@ package com.whow.promptdialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
-import java.time.format.TextStyle
+import androidx.recyclerview.widget.RecyclerView
 
 class PromptDialog private constructor() : DialogFragment(), PromptDialogInterface {
 
-    private var mController: PromptController? = null
+    private var mController: DialogController? = null
 
     companion object {
         private const val TITLE_TEXT_SIZE = 18f
         private const val MESSAGE_TEXT_SIZE = 15f
         private const val BUTTON_TEXT_SIZE = 16f
+
+        private const val DIALOG_STYLE_MESSAGE = 0
+        private const val DIALOG_STYLE_LIST = 1
     }
 
     class Builder(context: Context) {
 
+        private var dialogFlag: Int = 0
         private var mContext: Context
         private var mCancelable: Boolean = true
         private var mTitle: CharSequence? = null
@@ -52,9 +54,14 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
         private var BUTTON_POSITIVE_TEXT_COLOR: Int
         private var BUTTON_NEGATIVE_TEXT_COLOR: Int
 
+        private var mItems: List<String>? = null
+        var mClickListener: PromptDialogInterface.OnClickListener? = null
+        var mDialogAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
+
         init {
             mContext = context
-            BUTTON_POSITIVE_TEXT_COLOR = mContext.resources.getColor(R.color.color_btn_confirm, null)
+            BUTTON_POSITIVE_TEXT_COLOR =
+                mContext.resources.getColor(R.color.color_btn_confirm, null)
             BUTTON_NEGATIVE_TEXT_COLOR = mContext.resources.getColor(R.color.color_btn_cancel, null)
         }
 
@@ -88,6 +95,7 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
             this.mMessage = message
             this.mMessageColor = textColor
             this.mMessageSize = textSize
+            dialogFlag = DIALOG_STYLE_MESSAGE
         }
 
         fun setMessage(
@@ -186,10 +194,20 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
             this.mButtonVisible = Pair(which, visible)
         }
 
+        fun setDialogAdapter(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+            dialogFlag = DIALOG_STYLE_LIST
+            mDialogAdapter = adapter
+        }
+
         private fun create(): PromptDialog {
             val promptDialog = PromptDialog()
             promptDialog.isCancelable = mCancelable
-            promptDialog.setController(initController(promptDialog))
+            val dialogController = if (dialogFlag == DIALOG_STYLE_LIST) {
+                getListDialogController(promptDialog)
+            } else {
+                getTextDialogController(promptDialog)
+            }
+            promptDialog.setController(dialogController)
             return promptDialog
         }
 
@@ -200,8 +218,38 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
             return dialog
         }
 
-        private fun initController(promptInterface: PromptDialogInterface): PromptController {
-            return PromptController(mContext, promptInterface).apply {
+        private fun getListDialogController(promptInterface: PromptDialogInterface): ListDialogController {
+            return ListDialogController(
+                mContext,
+                promptInterface
+            ).apply {
+                mTitle = this@Builder.mTitle
+                mTitleColor = this@Builder.mTitleColor
+                mTitleSize = this@Builder.mTitleSize
+
+                mMessage = this@Builder.mMessage
+                mMessageColor = this@Builder.mMessageColor
+                mMessageSize = this@Builder.mMessageSize
+
+                mPositiveButtonText = this@Builder.mPositiveButtonText
+                mPositiveButtonColor = this@Builder.mPositiveButtonColor
+                mPositiveButtonSize = this@Builder.mPositiveButtonSize
+
+                mNegativeButtonText = this@Builder.mNegativeButtonText
+                mNegativeButtonColor = this@Builder.mNegativeButtonColor
+                mNegativeButtonSize = this@Builder.mNegativeButtonSize
+
+                mNegativeListener = this@Builder.mNegativeListener
+                mPositiveListener = this@Builder.mPositiveListener
+                mButtonVisible = this@Builder.mButtonVisible
+
+                mAdapter = this@Builder.mDialogAdapter
+                mClickListener = this@Builder.mClickListener
+            }
+        }
+
+        private fun getTextDialogController(promptInterface: PromptDialogInterface): TextDialogController {
+            return TextDialogController(mContext, promptInterface).apply {
                 mTitle = this@Builder.mTitle
                 mTitleColor = this@Builder.mTitleColor
                 mTitleSize = this@Builder.mTitleSize
@@ -230,7 +278,7 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return mController?.selectDialogView()
+        return mController?.getDialogView()
     }
 
     override fun onStart() {
@@ -241,7 +289,7 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
         }
     }
 
-    private fun setController(controller: PromptController) {
+    private fun setController(controller: DialogController) {
         mController = controller
     }
 

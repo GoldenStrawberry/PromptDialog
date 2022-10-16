@@ -15,15 +15,16 @@
      limitations under the License.
 -->
 <!--android:textAppearance="?attr/textAppearanceMedium"-->
-<!-- selecter => android:drawableStart="?attr/listChoiceIndicatorSingle"-->
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tv_checked"
+<!-- selecter android:drawableStart="?attr/listChoiceIndicatorSingle"=> -->
+<CheckedTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/checkView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?attr/listPreferredItemHeightSmall"
     android:textColor="?attr/textColorAlertDialogListItem"
+    android:checkMark="?android:attr/listChoiceIndicatorSingle"
     android:gravity="center_vertical"
-    android:paddingStart="@dimen/dp_20"
     android:paddingEnd="?attr/dialogPreferredPadding"
-    android:drawablePadding="@dimen/dp_20"
+    android:drawablePadding="@dimen/dp_10"
     android:ellipsize="marquee" />

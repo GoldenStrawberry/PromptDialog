@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <CheckedTextView
+        android:id="@+id/text_checked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/listPreferredItemHeightSmall"
+        android:textColor="?attr/textColorAlertDialogListItem"
+        android:gravity="center_vertical"
+        android:drawableLeft="@mipmap/ic_launcher"
+        android:drawableRight="@mipmap/ic_launcher"
+        android:paddingStart="@dimen/dp_20"
+        android:paddingEnd="?attr/dialogPreferredPadding"
+        android:drawablePadding="@dimen/dp_20"
+        android:ellipsize="marquee"
+        android:checkMark="?android:attr/listChoiceIndicatorSingle"
+        android:text="nihao周杰伦"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -19,6 +37,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/text_checked" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

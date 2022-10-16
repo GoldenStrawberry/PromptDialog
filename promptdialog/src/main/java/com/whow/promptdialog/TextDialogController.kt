@@ -1,16 +1,16 @@
 package com.whow.promptdialog
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.RecyclerView
 
-class PromptController(context: Context, promptInterface: PromptDialogInterface) {
-    private val mContext: Context
-    private val mInflater: LayoutInflater
+open class TextDialogController(context: Context, promptInterface: PromptDialogInterface) :
+    DialogController(context) {
 
-    private val mDialogInterface: PromptDialogInterface
+    protected val mDialogInterface: PromptDialogInterface
     var mTitle: CharSequence? = null
     var mTitleColor: Int? = null
     var mTitleSize: Float? = null
@@ -37,12 +37,10 @@ class PromptController(context: Context, promptInterface: PromptDialogInterface)
     private var lineView2: View? = null
 
     init {
-        mContext = context
         mDialogInterface = promptInterface
-        mInflater = LayoutInflater.from(context)
     }
 
-    fun selectDialogView() : View {
+    override fun getDialogView(): View {
         return getMessageDialog()
     }
 
@@ -54,12 +52,15 @@ class PromptController(context: Context, promptInterface: PromptDialogInterface)
         lineView1 = rootView.findViewById<View>(R.id.line1)
         lineView2 = rootView.findViewById<View>(R.id.line2)
 
+        rootView.findViewById<NestedScrollView>(R.id.scrollView_container).visibility = View.VISIBLE
+        rootView.findViewById<RecyclerView>(R.id.rcy_list).visibility = View.GONE
+
         titleTextView.visibility = View.GONE
         titleTextView.apply {
-             mTitle?.let {
-                 visibility = View.VISIBLE
-                 text = it
-             }
+            mTitle?.let {
+                visibility = View.VISIBLE
+                text = it
+            }
             mTitleColor?.let { setTextColor(it) }
             mTitleSize?.let { textSize = it }
         }
@@ -99,11 +100,11 @@ class PromptController(context: Context, promptInterface: PromptDialogInterface)
     private fun setButtonClickListener() {
         positiveButton?.setOnClickListener {
             mDialogInterface.dismissDialog()
-            mPositiveListener?.onClick(mDialogInterface , PromptDialogInterface.BUTTON_POSITIVE)
+            mPositiveListener?.onClick(mDialogInterface, PromptDialogInterface.BUTTON_POSITIVE)
         }
         negativeButton?.setOnClickListener {
             mDialogInterface.dismissDialog()
-            mNegativeListener?.onClick(mDialogInterface , PromptDialogInterface.BUTTON_NEGATIVE)
+            mNegativeListener?.onClick(mDialogInterface, PromptDialogInterface.BUTTON_NEGATIVE)
         }
     }
 

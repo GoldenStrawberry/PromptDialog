@@ -7,13 +7,13 @@
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_border_shape"
     android:minWidth="@dimen/dp_200"
-    android:minHeight="@dimen/dp_100">
+    android:minHeight="@dimen/dp_100"
+    android:paddingTop="@dimen/dp_10">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginEnd="@dimen/dp_10"
         android:textSize="@dimen/sp_18"
@@ -21,30 +21,12 @@
         android:textStyle="bold"
         tools:text="标题"
         app:layout_constrainedWidth="true"
-        app:layout_constrainedHeight="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:paddingStart="@dimen/dp_10"
-        android:paddingEnd="@dimen/dp_10"
-        android:overScrollMode="ifContentScrolls"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cl_bottom"
-        app:layout_constrainedHeight="true">
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
@@ -57,18 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cl_bottom">
-
-        <TextView
-            android:id="@+id/tv_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/sp_15"
-            android:textColor="@android:color/black"
-            android:layout_marginHorizontal="@dimen/dp_10"
-            android:layout_marginVertical="@dimen/dp_10"
-            android:maxWidth="@dimen/dp_280"
-            tools:text="内容" />
-    </androidx.core.widget.NestedScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_bottom"

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.whow.app.databinding.FragmentFirstBinding
 import com.whow.promptdialog.PromptDialog
 import com.whow.promptdialog.PromptDialogInterface
@@ -35,6 +36,7 @@ class FirstFragment : Fragment() {
                 setPositiveButton(positiveText = "确定", textSize = 20f, listener = object : PromptDialogInterface.OnClickListener{
                     override fun onClick(dialog: PromptDialogInterface, which: Int) {
                         Toast.makeText(requireContext(), "点击了确定", Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
                     }
                 })
                 setNegativeButton(negativeText = "取消", textSize = 20f, listener = object : PromptDialogInterface.OnClickListener{

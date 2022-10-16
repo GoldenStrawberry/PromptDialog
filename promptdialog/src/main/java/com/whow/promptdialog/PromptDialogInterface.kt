@@ -1,7 +1,5 @@
 package com.whow.promptdialog
 
-import androidx.fragment.app.DialogFragment
-
 interface PromptDialogInterface {
 
     companion object {
