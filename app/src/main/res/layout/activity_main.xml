@@ -13,8 +13,6 @@
         android:minHeight="?attr/listPreferredItemHeightSmall"
         android:textColor="?attr/textColorAlertDialogListItem"
         android:gravity="center_vertical"
-        android:drawableLeft="@mipmap/ic_launcher"
-        android:drawableRight="@mipmap/ic_launcher"
         android:paddingStart="@dimen/dp_20"
         android:paddingEnd="?attr/dialogPreferredPadding"
         android:drawablePadding="@dimen/dp_20"
