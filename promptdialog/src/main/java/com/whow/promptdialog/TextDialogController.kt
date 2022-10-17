@@ -19,12 +19,12 @@ open class TextDialogController(context: Context, promptInterface: PromptDialogI
     var mMessageColor: Int? = null
     var mMessageSize: Float? = null
 
-    private var positiveButton: TextView? = null
+    var positiveButton: TextView? = null
     var mPositiveButtonColor: Int? = null
     var mPositiveButtonSize: Float? = null
     var mPositiveButtonText: CharSequence? = null
 
-    private var negativeButton: TextView? = null
+    var negativeButton: TextView? = null
     var mNegativeButtonColor: Int? = null
     var mNegativeButtonSize: Float? = null
     var mNegativeButtonText: CharSequence? = null
@@ -97,7 +97,7 @@ open class TextDialogController(context: Context, promptInterface: PromptDialogI
         return rootView
     }
 
-    private fun setButtonClickListener() {
+    open fun setButtonClickListener() {
         positiveButton?.setOnClickListener {
             mDialogInterface.dismissDialog()
             mPositiveListener?.onClick(mDialogInterface, PromptDialogInterface.BUTTON_POSITIVE)

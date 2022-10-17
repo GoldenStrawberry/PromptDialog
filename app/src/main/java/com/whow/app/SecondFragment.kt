@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.whow.app.databinding.FragmentSecondBinding
 import com.whow.promptdialog.PromptDialog
+import com.whow.promptdialog.PromptDialogInterface
 
 class SecondFragment : Fragment() {
 
@@ -24,26 +26,39 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         secondBinding.tvDialogSingleChoice.setOnClickListener {
-            showDialog(ChoiceAdapter.CHOICE_TYPE_SINGLE)
+            showDialog(PromptDialog.CHOICE_TYPE_SINGLE)
         }
 
         secondBinding.tvDialogMultiChoice.setOnClickListener {
-            showDialog(ChoiceAdapter.CHOICE_TYPE_MULTI)
+            showDialog(PromptDialog.CHOICE_TYPE_MULTI)
         }
     }
 
+
     private fun showDialog(dialogType: Int) {
-        val list = mutableListOf<ChoiceBean>()
+        val list = mutableListOf<String>()
         for (index in 1..1000) {
-            list.add(ChoiceBean("账户余额 = $index"))
+            list.add("账户余额 = $index")
         }
-        val choiceAdapter = ChoiceAdapter(dialogType)
-        choiceAdapter.submitList(list)
+        val drawable = ContextCompat.getDrawable(
+            requireContext(),
+            com.whow.promptdialog.R.drawable.single_choice_selector
+        )
         val promptDialog = PromptDialog.Builder(requireContext()).apply {
             setTitle("提示")
             setNegativeButton("取消")
             setPositiveButton("确定")
-            setDialogAdapter(choiceAdapter as RecyclerView.Adapter<RecyclerView.ViewHolder>)
+            setChoiceItems(
+                items = list,
+                choiceType = dialogType,
+                defaultSelectID = 0,
+                checkMarkDrawable = drawable,
+                listener = object : PromptDialogInterface.OnClickItemListener {
+                    override fun onClickItem(choicePosition: Set<Int>) {
+                        Toast.makeText(context, "选中的条目 = $choicePosition", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
         }.show()
     }
 }

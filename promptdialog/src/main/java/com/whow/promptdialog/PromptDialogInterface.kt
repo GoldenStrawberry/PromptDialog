@@ -22,4 +22,8 @@ interface PromptDialogInterface {
          */
         fun onClick(dialog: PromptDialogInterface, which: Int)
     }
+
+    interface OnClickItemListener {
+        fun onClickItem(choicePosition: Set<Int>)
+    }
 }

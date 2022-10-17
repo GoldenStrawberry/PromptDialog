@@ -3,10 +3,12 @@ package com.whow.promptdialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
@@ -24,6 +26,9 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
 
         private const val DIALOG_STYLE_MESSAGE = 0
         private const val DIALOG_STYLE_LIST = 1
+
+        const val CHOICE_TYPE_SINGLE = 0
+        const val CHOICE_TYPE_MULTI = 1
     }
 
     class Builder(context: Context) {
@@ -55,7 +60,7 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
         private var BUTTON_NEGATIVE_TEXT_COLOR: Int
 
         private var mItems: List<String>? = null
-        var mClickListener: PromptDialogInterface.OnClickListener? = null
+        var mClickItemListener: PromptDialogInterface.OnClickItemListener? = null
         var mDialogAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>? = null
 
         init {
@@ -194,9 +199,39 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
             this.mButtonVisible = Pair(which, visible)
         }
 
-        fun setDialogAdapter(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>) {
+        fun <T: RecyclerView.ViewHolder>setDialogAdapter(adapter: RecyclerView.Adapter<T>) {
             dialogFlag = DIALOG_STYLE_LIST
-            mDialogAdapter = adapter
+            mDialogAdapter = adapter as RecyclerView.Adapter<RecyclerView.ViewHolder>
+        }
+
+        fun setChoiceItems(
+            items: List<String>,
+            choiceType: Int = CHOICE_TYPE_SINGLE,
+            defaultSelectID: Int? = null,
+            checkMarkDrawable: Drawable? = null,
+            itemDrawableLeft: Drawable? = null,
+            itemDrawableRight: Drawable? = null,
+            listener: PromptDialogInterface.OnClickItemListener? = null
+        ) {
+            val list = mutableListOf<ChoiceBean>()
+            var selectedIndex = -1
+            if (defaultSelectID != null) {
+                selectedIndex = defaultSelectID
+            }
+            for ((index, value) in items.withIndex()) {
+                val choiceBean = ChoiceBean(value, false)
+                choiceBean.checkMarkDrawable = checkMarkDrawable
+                choiceBean.drawableLeft = itemDrawableLeft
+                choiceBean.drawableRight = itemDrawableRight
+                if (index == selectedIndex) {
+                    choiceBean.checkStatus = true
+                }
+                list.add(choiceBean)
+            }
+            val choiceAdapter = ChoiceAdapter(choiceType)
+            choiceAdapter.setOnclickListener(listener)
+            choiceAdapter.submitList(list)
+            setDialogAdapter(choiceAdapter)
         }
 
         private fun create(): PromptDialog {
@@ -244,7 +279,6 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
                 mButtonVisible = this@Builder.mButtonVisible
 
                 mAdapter = this@Builder.mDialogAdapter
-                mClickListener = this@Builder.mClickListener
             }
         }
 
@@ -283,9 +317,11 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
 
     override fun onStart() {
         super.onStart()
-        // 使DialogFragment背景透明
         dialog?.window?.apply {
+            // 使DialogFragment背景透明
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            // 让底部虚拟按键消失
+            addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
         }
     }
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/listPreferredItemHeightSmall"
         android:textColor="@color/selector_text_hint_color"
-        android:checkMark="?android:attr/listChoiceIndicatorSingle"
+        android:checkMark="@mipmap/ic_checked"
         android:gravity="center_vertical"
         android:drawablePadding="@dimen/dp_10"
         android:ellipsize="marquee"

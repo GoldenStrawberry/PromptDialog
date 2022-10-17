@@ -3,6 +3,7 @@ package com.whow.promptdialog
 import android.content.Context
 import android.view.View
 import androidx.core.widget.NestedScrollView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -27,6 +28,7 @@ class ListDialogController(
         mRecyclerView = rootView.findViewById<RecyclerView>(R.id.rcy_list)
         mContainerScrollView.visibility = View.GONE
         mRecyclerView?.apply {
+            addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
             visibility = View.VISIBLE
             layoutManager = LinearLayoutManager(mContext).apply {
                 orientation = LinearLayoutManager.VERTICAL
@@ -34,6 +36,17 @@ class ListDialogController(
             mAdapter?.let {
                 adapter = it
             }
+        }
+    }
+
+    override fun setButtonClickListener() {
+        positiveButton?.setOnClickListener {
+            mDialogInterface.dismissDialog()
+
+            mPositiveListener?.onClick(mDialogInterface, PromptDialogInterface.BUTTON_POSITIVE)
+        }
+        negativeButton?.setOnClickListener {
+            mDialogInterface.dismissDialog()
         }
     }
 }

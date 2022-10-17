@@ -4,17 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/selector_text_hint_color.xml" value="0.108" />
+        <entry key="app/src/main/res/drawable/single_choice_selector.xml" value="0.1575" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13858695652173914" />
         <entry key="app/src/main/res/layout/dialog_multichoice.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dialog_singlechoice.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.2526041666666667" />
         <entry key="app/src/main/res/layout/layout_item_multi_choice.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/layout_item_single_choice.xml" value="0.253125" />
+        <entry key="app/src/main/res/layout/layout_item_single_choice.xml" value="0.1" />
         <entry key="promptdialog/src/main/res/drawable/dialog_border_shape.xml" value="0.1755" />
+        <entry key="promptdialog/src/main/res/drawable/single_choice_selector.xml" value="0.1575" />
         <entry key="promptdialog/src/main/res/layout/dialog_list_layout.xml" value="0.2515625" />
         <entry key="promptdialog/src/main/res/layout/dialog_material_layout.xml" value="0.335" />
         <entry key="promptdialog/src/main/res/layout/dialog_singlechoice.xml" value="0.16077898550724637" />
+        <entry key="promptdialog/src/main/res/layout/layout_item_single_choice.xml" value="0.253125" />
       </map>
     </option>
   </component>
