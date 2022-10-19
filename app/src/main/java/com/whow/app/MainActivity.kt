@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.CheckedTextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import com.whow.promptdialog.PromptDialog
 
 class MainActivity : AppCompatActivity() {
 

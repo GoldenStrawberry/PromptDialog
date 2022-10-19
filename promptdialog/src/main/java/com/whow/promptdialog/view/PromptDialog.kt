@@ -1,4 +1,4 @@
-package com.whow.promptdialog
+package com.whow.promptdialog.view
 
 import android.content.Context
 import android.graphics.Color
@@ -14,6 +14,13 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.whow.promptdialog.ChoiceAdapter
+import com.whow.promptdialog.ChoiceBean
+import com.whow.promptdialog.PromptDialogInterface
+import com.whow.promptdialog.R
+import com.whow.promptdialog.controller.DialogController
+import com.whow.promptdialog.controller.ListDialogController
+import com.whow.promptdialog.controller.TextDialogController
 
 class PromptDialog private constructor() : DialogFragment(), PromptDialogInterface {
 

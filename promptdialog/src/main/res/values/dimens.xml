@@ -15,5 +15,6 @@
     <dimen name="dp_100">100dp</dimen>
     <dimen name="dp_200">200dp</dimen>
     <dimen name="dp_280">280dp</dimen>
+    <dimen name="dp_180">180dp</dimen>
 
 </resources>

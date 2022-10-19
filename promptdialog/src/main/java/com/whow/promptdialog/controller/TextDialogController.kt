@@ -1,4 +1,4 @@
-package com.whow.promptdialog
+package com.whow.promptdialog.controller
 
 import android.content.Context
 import android.view.View
@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.RecyclerView
+import com.whow.promptdialog.PromptDialogInterface
+import com.whow.promptdialog.R
 
 open class TextDialogController(context: Context, promptInterface: PromptDialogInterface) :
     DialogController(context) {

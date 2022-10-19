@@ -8,8 +8,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.whow.app.databinding.FragmentSecondBinding
-import com.whow.promptdialog.PromptDialog
 import com.whow.promptdialog.PromptDialogInterface
+import com.whow.promptdialog.view.PromptDialog
 
 class SecondFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.whow.promptdialog
+package com.whow.promptdialog.controller
 
 import android.content.Context
 import android.view.LayoutInflater

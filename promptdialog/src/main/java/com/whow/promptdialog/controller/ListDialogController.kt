@@ -1,4 +1,4 @@
-package com.whow.promptdialog
+package com.whow.promptdialog.controller
 
 import android.content.Context
 import android.view.View
@@ -6,6 +6,8 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.whow.promptdialog.PromptDialogInterface
+import com.whow.promptdialog.R
 
 class ListDialogController(
     context: Context,
