@@ -3,6 +3,16 @@ PromptDialog是使用Kotlin编写一个对话框库。在开发项目中常常�
 为了避免重复'造轮子'，所以仿照AlertDialog编写了一个Material风格的对话框
 
 # 使用
+
+1、在build.gradle中添加依赖
+```
+
+dependencies {
+    implementation 'io.github.goldenstrawberry:prompt_dialog:1.0.0'
+}
+
+```
+2、文字对话框
 ```
 PromptDialog.Builder(requireContext()).apply {
     setTitle("提示",  textSize = 22f)
@@ -21,5 +31,30 @@ PromptDialog.Builder(requireContext()).apply {
 }.show("1")
 
 ```
+3、列表对话框
+```
+val promptDialog = PromptDialog.Builder(requireContext()).apply {
+            setTitle("提示")
+            setNegativeButton("取消")
+            setPositiveButton("确定")
+            setChoiceItems(
+                items = list,
+                choiceType = PromptDialog.CHOICE_TYPE_SINGLE,
+                defaultSelectID = 0,
+                listener = object : PromptDialogInterface.OnClickItemListener {
+                    override fun onClickItem(choicePosition: Set<Int>) {
+                        Toast.makeText(context, "选中的条目 = $choicePosition", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            )
+        }.show()
 
-# 开发完善中...
+```
+4、加载对话框
+```
+val loadingDialog = LoadingDialog.Builder(this).apply {
+            setMessage("加载中")
+            setCancelable(false)
+        }.show()
+
+```

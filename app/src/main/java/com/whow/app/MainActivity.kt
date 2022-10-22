@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.CheckedTextView
 import androidx.appcompat.app.AppCompatActivity
+import com.whow.promptdialog.view.LoadingDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         /*PromptDialog.Builder(this).apply {
             setMessage("欢迎来到PromptDialog")
         }.show("1")*/
-
+        val loadingDialog = LoadingDialog.Builder(this).apply {
+            setMessage("加载中")
+            setCancelable(false)
+        }.show()
     }
 }
