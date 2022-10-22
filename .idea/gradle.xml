@@ -12,7 +12,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/promptdialog" />
+            <option value="$PROJECT_DIR$/lib_promptdialog" />
           </set>
         </option>
       </GradleProjectSettings>
