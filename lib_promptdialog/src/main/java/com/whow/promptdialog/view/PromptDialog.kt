@@ -241,7 +241,7 @@ class PromptDialog private constructor() : DialogFragment(), PromptDialogInterfa
             setDialogAdapter(choiceAdapter)
         }
 
-        private fun create(): PromptDialog {
+        fun create(): PromptDialog {
             val promptDialog = PromptDialog()
             promptDialog.isCancelable = mCancelable
             val dialogController = if (dialogFlag == DIALOG_STYLE_LIST) {

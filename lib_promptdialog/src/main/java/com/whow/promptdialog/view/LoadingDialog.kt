@@ -123,4 +123,9 @@ class LoadingDialog private constructor(context: Context) : Dialog(context) {
         super.show()
         rotationAnimation(loadingImage)
     }
+
+    override fun dismiss() {
+        super.dismiss()
+        loadingImage.clearAnimation()
+    }
 }
